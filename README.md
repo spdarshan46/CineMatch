@@ -3,6 +3,8 @@
 CineMatch is a full-stack movie discovery web application that allows users to discover movies, search by title, filter by genre, sort results, view detailed movie information, and maintain a persistent wishlist.
 
 The application uses **React + Vite** for the frontend, **Node.js + Express** for the backend, **TMDB API** for movie data, and **SQLite** for wishlist persistence.
+<img width="1302" height="597" alt="image" src="https://github.com/user-attachments/assets/a5114578-bfda-407b-9aef-464d44dd0bd0" />
+<img width="1322" height="606" alt="image" src="https://github.com/user-attachments/assets/70721562-e0f7-49b1-82ce-421c0d16b45c" />
 
 ---
 
