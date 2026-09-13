@@ -1,0 +1,70 @@
+/* ── Reset-ish baseline ─────────────────────── */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: #0f172a;
+  color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+}
+
+/* ── App shell ──────────────────────────────── */
+
+.app {
+  min-height: 100vh;
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.app__main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+
+  /* Page-transition feel: fades content in on route change */
+  animation: app-fade-in 0.35s ease both;
+}
+
+@keyframes app-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .app__main {
+    padding: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app__main {
+    animation: none;
+  }
+}

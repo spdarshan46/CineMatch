@@ -1,0 +1,247 @@
+/* ── Card container ─────────────────────────── */
+
+.movie-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  background: #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+
+  transition:
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.25s ease;
+
+  animation: card-fade-in 0.4s ease both;
+}
+
+@keyframes card-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.movie-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.5);
+  background: #243247;
+}
+
+.movie-card:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
+}
+
+.movie-card:active {
+  transform: translateY(-2px) scale(0.99);
+}
+
+/* ── Poster area ────────────────────────────── */
+
+.movie-card__poster {
+  position: relative;
+  /* Responsive aspect ratio instead of fixed 320px height */
+  aspect-ratio: 2 / 3;
+  background: #334155;
+  overflow: hidden;
+}
+
+.movie-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.movie-card:hover .movie-card__img {
+  transform: scale(1.06);
+}
+
+.movie-card__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  height: 100%;
+  padding: 16px;
+
+  color: #64748b;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* ── Wishlist button ────────────────────────── */
+
+.movie-card__wishlist {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+  padding: 0;
+
+  color: #fff;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.2s ease;
+}
+
+.movie-card__wishlist:hover {
+  background: rgba(15, 23, 42, 0.95);
+  transform: scale(1.1);
+}
+
+.movie-card__wishlist:active {
+  transform: scale(0.95);
+}
+
+.movie-card__wishlist--active {
+  background: #ef4444;
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25);
+}
+
+.movie-card__wishlist--active:hover {
+  background: #dc2626;
+}
+
+/* Small heart pop when toggled */
+.movie-card__wishlist--active svg {
+  animation: heart-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes heart-pop {
+  0%   { transform: scale(0.6); }
+  60%  { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+/* ── Body / text ────────────────────────────── */
+
+.movie-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 8px;
+
+  padding: 14px;
+}
+
+.movie-card__title {
+  margin: 0;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f8fafc;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movie-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: auto;
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.movie-card__rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #fbbf24;
+  font-weight: 500;
+}
+
+.movie-card__year {
+  color: #94a3b8;
+}
+
+/* ── Responsive tweaks ──────────────────────── */
+
+@media (max-width: 640px) {
+  .movie-card__body {
+    padding: 12px;
+  }
+
+  .movie-card__title {
+    font-size: 0.9rem;
+  }
+
+  .movie-card__meta {
+    font-size: 0.8rem;
+  }
+
+  .movie-card__wishlist {
+    width: 34px;
+    height: 34px;
+    top: 8px;
+    right: 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .movie-card__body {
+    padding: 10px;
+  }
+
+  .movie-card__title {
+    font-size: 0.85rem;
+  }
+}
+
+/* ── Touch devices: no hover lift, use tap feedback ── */
+
+@media (hover: none) {
+  .movie-card:hover {
+    transform: none;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    background: #1e293b;
+  }
+
+  .movie-card:hover .movie-card__img {
+    transform: none;
+  }
+
+  .movie-card:active {
+    transform: scale(0.97);
+  }
+}
+
+/* ── Reduced motion ─────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .movie-card,
+  .movie-card__img,
+  .movie-card__wishlist,
+  .movie-card__wishlist--active svg {
+    animation: none;
+    transition: none;
+  }
+}
