@@ -423,7 +423,7 @@ The current implementation does not contain a comprehensive automated unit, inte
 The following AI tools were used during development:
 
 * **ChatGPT**
-* **Cursor**
+* **deepseek**
 * **Gemini**
 
 AI was used as a development assistance and troubleshooting resource.
