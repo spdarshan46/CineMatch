@@ -1,0 +1,149 @@
+/* ── Card container ─────────────────────────── */
+
+.skeleton-card {
+  display: flex;
+  flex-direction: column;
+
+  background: #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  animation: skeleton-fade-in 0.3s ease both;
+}
+
+@keyframes skeleton-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Poster area ────────────────────────────── */
+
+.skeleton-card__poster {
+  /* Matches the real MovieCard: aspect-ratio 2/3 */
+  aspect-ratio: 2 / 3;
+  background: #334155;
+}
+
+/* ── Body ───────────────────────────────────── */
+
+.skeleton-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  padding: 14px;
+}
+
+.skeleton-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: auto;
+}
+
+/* ── Shimmer lines ──────────────────────────── */
+
+.skeleton-card__line,
+.skeleton-card__poster {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Base fill */
+.skeleton-card__line {
+  height: 12px;
+  background: #334155;
+  border-radius: 4px;
+}
+
+/* Shimmer overlay — a translucent gradient that sweeps left→right */
+.skeleton-card__line::after,
+.skeleton-card__poster::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(148, 163, 184, 0.12) 50%,
+    transparent 100%
+  );
+
+  transform: translateX(-100%);
+  animation: skeleton-shimmer 1.5s infinite;
+}
+
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ── Line widths ────────────────────────────── */
+
+.skeleton-card__line--title {
+  width: 80%;
+  height: 14px;
+}
+
+.skeleton-card__line--rating {
+  width: 48px;
+  height: 12px;
+}
+
+.skeleton-card__line--year {
+  width: 36px;
+  height: 12px;
+}
+
+/* ── Responsive tweaks (match MovieCard breakpoints) ──── */
+
+@media (max-width: 640px) {
+  .skeleton-card__body {
+    padding: 12px;
+  }
+
+  .skeleton-card__line--title {
+    height: 13px;
+  }
+
+  .skeleton-card__line--rating,
+  .skeleton-card__line--year {
+    height: 11px;
+  }
+}
+
+@media (max-width: 380px) {
+  .skeleton-card__body {
+    padding: 10px;
+  }
+
+  .skeleton-card__line--title {
+    height: 12px;
+  }
+}
+
+/* ── Reduced motion ─────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-card,
+  .skeleton-card__line::after,
+  .skeleton-card__poster::after {
+    animation: none;
+  }
+
+  /* Static pulse instead of shimmer */
+  .skeleton-card__line,
+  .skeleton-card__poster {
+    opacity: 0.7;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes skeleton-pulse {
+    0%, 100% { opacity: 0.5; }
+    50%      { opacity: 0.75; }
+  }
+}
